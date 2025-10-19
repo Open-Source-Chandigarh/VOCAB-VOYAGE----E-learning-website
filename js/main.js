@@ -108,6 +108,34 @@
 
 })(jQuery);
 
+// Dark Mode Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    
+    // Apply the saved theme on page load
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+    
+    // Dark mode toggle button event listener
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+            // Toggle dark mode class on body
+            document.body.classList.toggle('dark-mode');
+            
+            // Save the user's preference to localStorage
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
+});
+
 
 
 
