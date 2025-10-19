@@ -133,7 +133,7 @@
 .navbar{
     position: sticky;
     top:0;
-    z-index: 30px;    /*  ensures doesn't get behind any other elements  */
+    z-index: 30px;    /*  ensures doesn't get behind any other element  */
 }
 
 @media (max-width: 991.98px) {
