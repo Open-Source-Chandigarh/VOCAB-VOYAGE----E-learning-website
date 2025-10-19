@@ -4,6 +4,172 @@
     --light: #F0FBFC;
     --light: #f0e4de;
     --dark: #181d38;
+    
+    /* Light mode colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --navbar-bg: #ffffff;
+    --footer-bg: #181d38;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode colors */
+body.dark-mode {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --text-primary: #eaeaea;
+    --text-secondary: #b4b4b4;
+    --border-color: #2d3748;
+    --card-bg: #0f3460;
+    --navbar-bg: #16213e;
+    --footer-bg: #0f0f1e;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Apply dark mode styles */
+body.dark-mode {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+body.dark-mode .navbar {
+    background-color: var(--navbar-bg) !important;
+}
+
+body.dark-mode .service-item,
+body.dark-mode .course-item,
+body.dark-mode .category .content {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .shadow {
+    box-shadow: 0 0.5rem 1rem var(--shadow) !important;
+}
+
+body.dark-mode .bg-white {
+    background-color: var(--bg-primary) !important;
+}
+
+body.dark-mode .bg-light {
+    background-color: var(--bg-secondary) !important;
+}
+
+body.dark-mode .text-dark {
+    color: var(--text-primary) !important;
+}
+
+body.dark-mode .navbar-light .navbar-nav .nav-link {
+    color: var(--text-primary);
+}
+
+body.dark-mode .navbar-light .navbar-nav .nav-link:hover,
+body.dark-mode .navbar-light .navbar-nav .nav-link.active {
+    color: var(--primary);
+}
+
+body.dark-mode .dropdown-menu {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .dropdown-item {
+    color: var(--text-primary);
+}
+
+body.dark-mode .dropdown-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+body.dark-mode .footer {
+    background-color: var(--footer-bg);
+}
+
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode h4, 
+body.dark-mode h5, 
+body.dark-mode h6 {
+    color: var(--text-primary);
+}
+
+body.dark-mode p {
+    color: var(--text-secondary);
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background-color: #ccc;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
+    outline: none;
+    margin-right: 15px;
+}
+
+.dark-mode-toggle:hover {
+    background-color: #b3b3b3;
+}
+
+body.dark-mode .dark-mode-toggle {
+    background-color: #fb873f;
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+    background-color: #f69050;
+}
+
+.dark-mode-toggle::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+body.dark-mode .dark-mode-toggle::before {
+    transform: translateX(24px);
+}
+
+.dark-mode-toggle i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    transition: opacity 0.3s;
+}
+
+.dark-mode-toggle .fa-sun {
+    left: 6px;
+    color: #ffd700;
+}
+
+.dark-mode-toggle .fa-moon {
+    right: 6px;
+    color: #f0f0f0;
+    opacity: 0.3;
+}
+
+body.dark-mode .dark-mode-toggle .fa-sun {
+    opacity: 0.3;
+}
+
+body.dark-mode .dark-mode-toggle .fa-moon {
+    opacity: 1;
 }
 
 .btn {
