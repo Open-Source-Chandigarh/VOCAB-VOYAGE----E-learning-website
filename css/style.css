@@ -7,24 +7,35 @@
 }
 
 
+/* Button Styles */
 .btn {
     background-color: #fb873f;
     border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn a {
     text-decoration: none;
     color: #fff;
+    transition: all 0.3s ease;
 }
 
 .btn:hover {
     background: transparent;
     color: var(--primary) !important;
     border: 1px solid var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(251, 135, 63, 0.3);
 }
 
 .btn:hover a {
     color: var(--primary) !important;
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-light {
@@ -423,6 +434,154 @@
 .category img {
     width: 50px;
     height: 50px;
+}
+
+/* Form Improvements */
+.form-control {
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(246, 144, 80, 0.25);
+}
+
+.form-floating > label {
+    color: #6c757d;
+    transition: all 0.2s ease;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--primary);
+}
+
+/* Card Improvements */
+.course-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.course-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.course-item img {
+    transition: transform 0.3s ease;
+}
+
+.course-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Shadow Utilities */
+.shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.shadow:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Testimonial Cards */
+.testimonial-item {
+    transition: transform 0.3s ease;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-5px);
+}
+
+.testimonial-text {
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Team Cards */
+.team-item {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.team-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer Links */
+.footer a {
+    transition: all 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--primary) !important;
+    padding-left: 5px;
+}
+
+/* Social Buttons */
+.btn-social {
+    transition: all 0.3s ease;
+}
+
+.btn-social:hover {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    transform: translateY(-3px);
+}
+
+/* Smooth Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #e5803a;
+}
+
+/* Accessibility Improvements */
+*:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+a:focus,
+button:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Loading Animation */
+.spinner-border {
+    animation: spinner-border 0.75s linear infinite;
+}
+
+/* Breadcrumb Improvements */
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--primary) !important;
 }
 
 .category img,
