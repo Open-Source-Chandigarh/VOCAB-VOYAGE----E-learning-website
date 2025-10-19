@@ -72,7 +72,7 @@
     // Header carousel
     $(".header-carousel").owlCarousel({
         autoplay: true,
-        smartSpeed: 1500,
+        smartSpeed: window.innerWidth < 768 ? 2000 : 1500, // Slower on mobile
         items: 1,
         dots: false,
         loop: true,
@@ -80,14 +80,22 @@
         navText: [
             '<i class="bi bi-chevron-left"></i>',
             '<i class="bi bi-chevron-right"></i>'
-        ]
+        ],
+        responsive: {
+            0: {
+                smartSpeed: 2000  // Slower transition for mobile devices
+            },
+            768: {
+                smartSpeed: 1500  // Normal speed for desktop
+            }
+        }
     });
 
 
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
         autoplay: true,
-        smartSpeed: 1000,
+        smartSpeed: window.innerWidth < 768 ? 1500 : 1000, // Slower on mobile
         center: true,
         margin: 24,
         dots: true,
@@ -95,14 +103,77 @@
         nav: false,
         responsive: {
             0: {
-                items: 1
+                items: 1,
+                smartSpeed: 1500  // Slower transition for mobile devices
             },
             768: {
-                items: 2
+                items: 2,
+                smartSpeed: 1000  // Normal speed for tablet and desktop
             },
             992: {
-                items: 3
+                items: 3,
+                smartSpeed: 1000  // Normal speed for desktop
             }
+        }
+    });
+
+    // Handle window resize to update carousel speeds dynamically
+    $(window).on('resize', function() {
+        // Update header carousel speed based on new viewport width
+        const headerCarousel = $('.header-carousel');
+        if (headerCarousel.length && headerCarousel.data('owl.carousel')) {
+            const newSpeed = window.innerWidth < 768 ? 2000 : 1500;
+            headerCarousel.trigger('destroy.owl.carousel');
+            headerCarousel.owlCarousel({
+                autoplay: true,
+                smartSpeed: newSpeed,
+                items: 1,
+                dots: false,
+                loop: true,
+                nav: true,
+                navText: [
+                    '<i class="bi bi-chevron-left"></i>',
+                    '<i class="bi bi-chevron-right"></i>'
+                ],
+                responsive: {
+                    0: {
+                        smartSpeed: 2000
+                    },
+                    768: {
+                        smartSpeed: 1500
+                    }
+                }
+            });
+        }
+
+        // Update testimonial carousel speed based on new viewport width
+        const testimonialCarousel = $('.testimonial-carousel');
+        if (testimonialCarousel.length && testimonialCarousel.data('owl.carousel')) {
+            const newSpeed = window.innerWidth < 768 ? 1500 : 1000;
+            testimonialCarousel.trigger('destroy.owl.carousel');
+            testimonialCarousel.owlCarousel({
+                autoplay: true,
+                smartSpeed: newSpeed,
+                center: true,
+                margin: 24,
+                dots: true,
+                loop: true,
+                nav: false,
+                responsive: {
+                    0: {
+                        items: 1,
+                        smartSpeed: 1500
+                    },
+                    768: {
+                        items: 2,
+                        smartSpeed: 1000
+                    },
+                    992: {
+                        items: 3,
+                        smartSpeed: 1000
+                    }
+                }
+            });
         }
     });
 
