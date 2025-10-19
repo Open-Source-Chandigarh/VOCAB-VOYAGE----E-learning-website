@@ -6,6 +6,7 @@
     --dark: #181d38;
 }
 
+
 .btn {
     background-color: #fb873f;
     border: none;
@@ -132,6 +133,7 @@
 }
 
 @media (max-width: 991.98px) {
+  
     .navbar-light .navbar-nav .nav-link {
         margin-right: 0;
         padding: 10px 0;
@@ -140,6 +142,22 @@
     .navbar-light .navbar-nav {
         border-top: 1px solid #EEEEEE;
     }
+      .navbar-collapse {
+    background: #fff; 
+    z-index: 9999;  
+      position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+    .navbar-collapse.collapse.show {
+    display: block;
+  }
+  .carousel,
+.hero-section {
+  margin-top: 75px;
+}
 }
 
 .navbar-light .navbar-brand,
@@ -153,8 +171,10 @@
 }
 
 .navbar-light.sticky-top {
-    top: -100px;
-    transition: .5s;
+  top: 0 !important;
+  transition: none !important;
+  z-index: 1030;
+
 }
 
 .navbar-toggler-icon {
@@ -188,6 +208,13 @@
         opacity: 1;
     }
 }
+/* .navbar-light.sticky-top {
+  top: 0;
+  transition: none;
+  z-index: 1030;
+} */
+
+
 
 /*** Header carousel ***/
 
