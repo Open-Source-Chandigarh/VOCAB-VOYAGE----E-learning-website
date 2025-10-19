@@ -63,7 +63,8 @@
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
+        // instant scroll to top with no animation/delay
+        $('html, body').animate({ scrollTop: 0 }, 0);
         return false;
     });
 
