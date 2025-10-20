@@ -70,43 +70,101 @@
 
 
     // Header carousel
-    $(".header-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1500,
-        items: 1,
-        dots: false,
-        loop: true,
-        nav: true,
-        navText: [
-            '<i class="bi bi-chevron-left"></i>',
-            '<i class="bi bi-chevron-right"></i>'
-        ]
-    });
+    // $(".header-carousel").owlCarousel({
+    //     autoplay: true,
+    //     smartSpeed: 1500,
+    //     items: 1,
+    //     dots: false,
+    //     loop: true,
+    //     nav: true,
+    //     navText: [
+    //         '<i class="bi bi-chevron-left"></i>',
+    //         '<i class="bi bi-chevron-right"></i>'
+    //     ]
+    // });
 
+    //     $(".header-carousel").owlCarousel({
+    //     autoplay: true,
+    //     smartSpeed: window.innerWidth < 768 ? 2000 : 1500,
+    //     items: 1,
+    //     dots: false,
+    //     loop: true,
+    //     nav: true,
+    //     navText: [
+    //         '<i class="bi bi-chevron-left"></i>',
+    //         '<i class="bi bi-chevron-right"></i>'
+    //     ]
+    // });
 
     // Testimonials carousel
-    $(".testimonial-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1000,
-        center: true,
-        margin: 24,
-        dots: true,
-        loop: true,
-        nav: false,
-        responsive: {
-            0: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            992: {
-                items: 3
+    // $(".testimonial-carousel").owlCarousel({
+    //     autoplay: true,
+    //     smartSpeed: 1000,
+//         center: true,
+//         margin: 24,
+//         dots: true,
+//         loop: true,
+//         nav: false,
+//         responsive: {
+//             0: {
+//                 items: 1
+//             },
+//             768: {
+//                 items: 2
+//             },
+//             992: {
+//                 items: 3
+//             }
+//         }
+//     });
+
+// })(jQuery);
+
+    //header and testimonial corousel
+
+    (function ($) {
+    "use strict";
+
+    function initCarousels() {
+        const isMobile = window.innerWidth < 768;
+
+        $(".header-carousel").owlCarousel({
+            autoplay: true,
+            smartSpeed: isMobile ? 2000 : 1500,
+            items: 1,
+            dots: false,
+            loop: true,
+            nav: true,
+            navText: [
+                '<i class="bi bi-chevron-left"></i>',
+                '<i class="bi bi-chevron-right"></i>'
+            ]
+        });
+
+        $(".testimonial-carousel").owlCarousel({
+            autoplay: true,
+            smartSpeed: isMobile ? 1500 : 1000,
+            center: true,
+            margin: 24,
+            dots: true,
+            loop: true,
+            nav: false,
+            responsive: {
+                0: { items: 1 },
+                768: { items: 2 },
+                992: { items: 3 }
             }
-        }
+        });
+    }
+
+    $(document).ready(initCarousels);
+    $(window).on("resize", function () {
+        $(".header-carousel, .testimonial-carousel").trigger("destroy.owl.carousel");
+        initCarousels();
     });
 
 })(jQuery);
+
 
 // Dark Mode Toggle Functionality
 document.addEventListener('DOMContentLoaded', function() {
