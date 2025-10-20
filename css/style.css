@@ -30,6 +30,37 @@ body.dark-mode {
     --shadow: rgba(0, 0, 0, 0.3);
 }
 
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar, 
+.service-item, 
+.course-item, 
+.category .content,
+.shadow,
+.card,
+.bg-white,
+.bg-light {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.dropdown-menu,
+.dropdown-item {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    transition: color 0.3s ease;
+}
+
 /* Apply dark mode styles */
 body.dark-mode {
     background-color: var(--bg-primary);
@@ -103,7 +134,37 @@ body.dark-mode p {
     color: var(--text-secondary);
 }
 
-/* Dark mode toggle button */
+/* Dark mode accordion styling */
+body.dark-mode .accordion-item {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .accordion-button {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+}
+
+body.dark-mode .accordion-button:not(.collapsed) {
+    background-color: var(--bg-secondary);
+    color: var(--primary);
+}
+
+body.dark-mode .accordion-button:focus {
+    border-color: var(--border-color);
+    box-shadow: 0 0 0 0.25rem rgba(246, 144, 80, 0.25);
+}
+
+body.dark-mode .accordion-body {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .accordion-button::after {
+    filter: invert(1);
+}
+
+/* Dark mode toggle button */   
 .dark-mode-toggle {
     position: relative;
     width: 50px;
