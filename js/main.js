@@ -303,6 +303,20 @@
 (function ($) {
     "use strict";
 
+    // Throttle utility function to limit function execution frequency
+    function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        }
+    }
+
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -316,14 +330,23 @@
     // Initiate WOW.js
     new WOW().init();
 
-    // Sticky Navbar
-    $(window).scroll(function () {
+    // Optimized Sticky Navbar with throttling and transform for better performance
+    const handleStickyNavbar = throttle(function () {
+        const navbar = $('.sticky-top');
         if ($(this).scrollTop() > 300) {
-            $('.sticky-top').css('top', '0px');
+            navbar.css({
+                'transform': 'translateY(0)',
+                'top': '0px'
+            });
         } else {
-            $('.sticky-top').css('top', '-100px');
+            navbar.css({
+                'transform': 'translateY(-100%)',
+                'top': '-100px'
+            });
         }
-    });
+    }, 16); // ~60fps throttling
+
+    $(window).scroll(handleStickyNavbar);
 
     // Dropdown on mouse hover
     const $dropdown = $(".dropdown");
@@ -352,14 +375,16 @@
         }
     });
 
-    // Back to top button
-    $(window).scroll(function () {
+    // Optimized Back to top button with throttling
+    const handleBackToTop = throttle(function () {
         if ($(this).scrollTop() > 300) {
             $('.back-to-top').fadeIn('slow');
         } else {
             $('.back-to-top').fadeOut('slow');
         }
-    });
+    }, 100); // Less frequent updates for back-to-top as it's less critical
+
+    $(window).scroll(handleBackToTop);
     $('.back-to-top').click(function () {
         $('html, body').animate({ scrollTop: 0 }, 0);
         return false;
