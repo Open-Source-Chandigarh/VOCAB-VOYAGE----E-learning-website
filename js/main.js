@@ -276,20 +276,20 @@
 // document.addEventListener('DOMContentLoaded', function() {
 //     // Check for saved theme preference or default to light mode
 //     const currentTheme = localStorage.getItem('theme') || 'light';
-    
+
 //     // Apply the saved theme on page load
 //     if (currentTheme === 'dark') {
 //         document.body.classList.add('dark-mode');
 //     }
-    
+
 //     // Dark mode toggle button event listener
 //     const darkModeToggle = document.getElementById('darkModeToggle');
-    
+
 //     if (darkModeToggle) {
 //         darkModeToggle.addEventListener('click', function() {
 //             // Toggle dark mode class on body
 //             document.body.classList.toggle('dark-mode');
-            
+
 //             // Save the user's preference to localStorage
 //             if (document.body.classList.contains('dark-mode')) {
 //                 localStorage.setItem('theme', 'dark');
@@ -325,30 +325,73 @@
         }
     });
 
-    // Dropdown on mouse hover
+    // Dropdown on mouse hover with smooth transitions
     const $dropdown = $(".dropdown");
     const $dropdownToggle = $(".dropdown-toggle");
     const $dropdownMenu = $(".dropdown-menu");
     const showClass = "show";
+    let hoverTimeout;
+    let isHovering = false;
 
     $(window).on("load resize", function () {
         if (this.matchMedia("(min-width: 992px)").matches) {
-            $dropdown.hover(
-                function () {
-                    const $this = $(this);
-                    $this.addClass(showClass);
-                    $this.find($dropdownToggle).attr("aria-expanded", "true");
-                    $this.find($dropdownMenu).addClass(showClass);
-                },
-                function () {
-                    const $this = $(this);
-                    $this.removeClass(showClass);
-                    $this.find($dropdownToggle).attr("aria-expanded", "false");
-                    $this.find($dropdownMenu).removeClass(showClass);
-                }
-            );
+            $dropdown.off("mouseenter mouseleave");
+
+            $dropdown.on("mouseenter", function () {
+                const $this = $(this);
+                isHovering = true;
+
+                // Clear any existing timeout
+                clearTimeout(hoverTimeout);
+
+                // Add delay before showing dropdown
+                hoverTimeout = setTimeout(function () {
+                    if (isHovering) {
+                        $this.addClass(showClass);
+                        $this.find($dropdownToggle).attr("aria-expanded", "true");
+                        $this.find($dropdownMenu).addClass(showClass);
+                    }
+                }, 200); // 200ms delay
+            });
+
+            $dropdown.on("mouseleave", function () {
+                const $this = $(this);
+                isHovering = false;
+
+                // Clear any existing timeout
+                clearTimeout(hoverTimeout);
+
+                // Add delay before hiding dropdown
+                hoverTimeout = setTimeout(function () {
+                    if (!isHovering) {
+                        $this.removeClass(showClass);
+                        $this.find($dropdownToggle).attr("aria-expanded", "false");
+                        $this.find($dropdownMenu).removeClass(showClass);
+                    }
+                }, 150); // 150ms delay (slightly shorter for better UX)
+            });
+
+            // Handle dropdown menu hover to keep it open
+            $dropdownMenu.on("mouseenter", function () {
+                isHovering = true;
+                clearTimeout(hoverTimeout);
+            });
+
+            $dropdownMenu.on("mouseleave", function () {
+                isHovering = false;
+                clearTimeout(hoverTimeout);
+
+                hoverTimeout = setTimeout(function () {
+                    if (!isHovering) {
+                        $dropdown.removeClass(showClass);
+                        $dropdownToggle.attr("aria-expanded", "false");
+                        $dropdownMenu.removeClass(showClass);
+                    }
+                }, 150);
+            });
         } else {
             $dropdown.off("mouseenter mouseleave");
+            $dropdownMenu.off("mouseenter mouseleave");
         }
     });
 
@@ -409,7 +452,7 @@
 })(jQuery);
 
 // Dark Mode Toggle Functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const currentTheme = localStorage.getItem('theme') || 'light';
 
     if (currentTheme === 'dark') {
@@ -418,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const darkModeToggle = document.getElementById('darkModeToggle');
     if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', function() {
+        darkModeToggle.addEventListener('click', function () {
             document.body.classList.toggle('dark-mode');
             if (document.body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
@@ -428,9 +471,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
-
-
-
-
-

@@ -4,7 +4,7 @@
     --light: #F0FBFC;
     --light: #f0e4de;
     --dark: #181d38;
-    
+
     /* Light mode colors */
     --bg-primary: #ffffff;
     --bg-secondary: #f8f9fa;
@@ -38,18 +38,18 @@ body.dark-mode {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.navbar, 
-.service-item, 
-.course-item, 
+.navbar,
+.service-item,
+.course-item,
 .category .content,
 .shadow,
 .card,
 .bg-white,
 .bg-light {
-    transition: background-color 0.3s ease, 
-                color 0.3s ease, 
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
+    transition: background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .dropdown-menu,
@@ -57,7 +57,13 @@ body.dark-mode {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     transition: color 0.3s ease;
 }
 
@@ -121,11 +127,11 @@ body.dark-mode .footer {
     background-color: var(--footer-bg);
 }
 
-body.dark-mode h1, 
-body.dark-mode h2, 
-body.dark-mode h3, 
-body.dark-mode h4, 
-body.dark-mode h5, 
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
 body.dark-mode h6 {
     color: var(--text-primary);
 }
@@ -164,7 +170,7 @@ body.dark-mode .accordion-button::after {
     filter: invert(1);
 }
 
-/* Dark mode toggle button */   
+/* Dark mode toggle button */
 .dark-mode-toggle {
     position: relative;
     width: 50px;
@@ -371,7 +377,7 @@ body.dark-mode .dark-mode-toggle .fa-moon {
 }
 
 @media (max-width: 991.98px) {
-  
+
     .navbar-light .navbar-nav .nav-link {
         margin-right: 0;
         padding: 10px 0;
@@ -380,22 +386,25 @@ body.dark-mode .dark-mode-toggle .fa-moon {
     .navbar-light .navbar-nav {
         border-top: 1px solid #EEEEEE;
     }
-      .navbar-collapse {
-    background: #fff; 
-    z-index: 9999;  
-      position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
+
+    .navbar-collapse {
+        background: #fff;
+        z-index: 9999;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
     .navbar-collapse.collapse.show {
-    display: block;
-  }
-  .carousel,
-.hero-section {
-  margin-top: 75px;
-}
+        display: block;
+    }
+
+    .carousel,
+    .hero-section {
+        margin-top: 75px;
+    }
 }
 
 .navbar-light .navbar-brand,
@@ -409,9 +418,9 @@ body.dark-mode .dark-mode-toggle .fa-moon {
 }
 
 .navbar-light.sticky-top {
-  top: 0 !important;
-  transition: none !important;
-  z-index: 1030;
+    top: 0 !important;
+    transition: none !important;
+    z-index: 1030;
 
 }
 
@@ -429,23 +438,54 @@ body.dark-mode .dark-mode-toggle .fa-moon {
         margin-top: 0;
         opacity: 0;
         visibility: hidden;
-        transition: .5s;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
+        transform: translateY(-10px);
     }
 
     .navbar .dropdown-menu.fade-down {
         top: 100%;
-        transform: rotateX(-75deg);
+        transform: translateY(-10px) rotateX(-75deg);
         transform-origin: 0% 0%;
     }
 
-    .navbar .nav-item:hover .dropdown-menu {
+    .navbar .nav-item:hover .dropdown-menu,
+    .navbar .nav-item .dropdown.show .dropdown-menu {
         top: 100%;
-        transform: rotateX(0deg);
+        transform: translateY(0) rotateX(0deg);
         visibility: visible;
-        transition: .5s;
         opacity: 1;
     }
+
+    /* Smooth transition for dropdown items */
+    .navbar .dropdown-menu .dropdown-item {
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+
+    /* Prevent flicker during transitions */
+    .navbar .nav-item .dropdown-menu {
+        pointer-events: none;
+    }
+
+    .navbar .nav-item:hover .dropdown-menu,
+    .navbar .nav-item .dropdown.show .dropdown-menu {
+        pointer-events: auto;
+    }
+
+    /* Additional smoothness improvements */
+    .navbar .nav-item .dropdown-menu {
+        will-change: opacity, transform, visibility;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+    }
+
+    /* Ensure dropdown stays visible when hovering over it */
+    .navbar .dropdown-menu:hover {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) rotateX(0deg) !important;
+    }
 }
+
 /* .navbar-light.sticky-top {
   top: 0;
   transition: none;
@@ -675,13 +715,13 @@ body.dark-mode .dark-mode-toggle .fa-moon {
     box-shadow: 0 0 0 0.2rem rgba(246, 144, 80, 0.25);
 }
 
-.form-floating > label {
+.form-floating>label {
     color: #6c757d;
     transition: all 0.2s ease;
 }
 
-.form-floating > .form-control:focus ~ label,
-.form-floating > .form-control:not(:placeholder-shown) ~ label {
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label {
     color: var(--primary);
 }
 
