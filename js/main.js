@@ -476,3 +476,20 @@ const currentPage = window.location.pathname.split("/").pop(); // get current fi
             link.classList.remove("active");
         }
     });
+
+    const dropdowns = document.querySelectorAll('.navbar .dropdown');
+
+dropdowns.forEach(drop => {
+  let showTimeout, hideTimeout;
+
+  drop.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout); // cancel hiding if mouse comes back
+    showTimeout = setTimeout(() => drop.classList.add('show'), 200); // show after 200ms
+  });
+
+  drop.addEventListener('mouseleave', () => {
+    clearTimeout(showTimeout); // cancel showing if mouse leaves early
+    hideTimeout = setTimeout(() => drop.classList.remove('show'), 200); // hide after 200ms
+  });
+});
+
