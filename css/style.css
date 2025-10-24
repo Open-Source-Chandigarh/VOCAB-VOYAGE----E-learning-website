@@ -30,6 +30,11 @@ body.dark-mode {
     --shadow: rgba(0, 0, 0, 0.3);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -973,4 +978,16 @@ button:focus {
     margin-right: 0;
     padding-right: 0;
     border-right: none;
+}
+
+.navbar {
+  will-change: transform;
+  backface-visibility: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.navbar.scrolled {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
