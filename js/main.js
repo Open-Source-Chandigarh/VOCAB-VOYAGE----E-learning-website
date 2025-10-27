@@ -330,23 +330,31 @@
     // Initiate WOW.js
     new WOW().init();
 
-    // Optimized Sticky Navbar with throttling and transform for better performance
-    const handleStickyNavbar = throttle(function () {
-        const navbar = $('.sticky-top');
-        if ($(this).scrollTop() > 300) {
-            navbar.css({
-                'transform': 'translateY(0)',
-                'top': '0px'
-            });
-        } else {
+    // Smart Navbar - Hide on scroll down, show on scroll up
+    let lastScrollTop = 0;
+    const navbar = $('.sticky-top');
+    
+    const handleSmartNavbar = throttle(function () {
+        let scrollTop = $(this).scrollTop();
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down - hide navbar
             navbar.css({
                 'transform': 'translateY(-100%)',
-                'top': '-100px'
+                'transition': 'transform 0.3s ease-in-out'
+            });
+        } else {
+            // Scrolling up - show navbar
+            navbar.css({
+                'transform': 'translateY(0)',
+                'transition': 'transform 0.3s ease-in-out'
             });
         }
+        
+        lastScrollTop = scrollTop;
     }, 16); // ~60fps throttling
 
-    $(window).scroll(handleStickyNavbar);
+    $(window).scroll(handleSmartNavbar);
 
     // Dropdown on mouse hover
     const $dropdown = $(".dropdown");
