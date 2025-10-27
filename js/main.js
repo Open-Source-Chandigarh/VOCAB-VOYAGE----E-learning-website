@@ -308,6 +308,7 @@
         setTimeout(() => (inThrottle = false), limit);
       }
     };
+
   }
 
   // Spinner
@@ -361,6 +362,72 @@
           $this.removeClass(showClass);
           $this.find($dropdownToggle).attr("aria-expanded", "false");
           $this.find($dropdownMenu).removeClass(showClass);
+
+    spinner();
+
+    // Initiate WOW.js
+    new WOW().init();
+
+    // Smart Navbar - Hide on scroll down, show on scroll up
+    let lastScrollTop = 0;
+    const navbar = $('.sticky-top');
+    
+    const handleSmartNavbar = throttle(function () {
+        let scrollTop = $(this).scrollTop();
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down - hide navbar
+            navbar.css({
+                'transform': 'translateY(-100%)',
+                'transition': 'transform 0.3s ease-in-out'
+            });
+        } else {
+            // Scrolling up - show navbar
+            navbar.css({
+                'transform': 'translateY(0)',
+                'transition': 'transform 0.3s ease-in-out'
+            });
+        }
+        
+        lastScrollTop = scrollTop;
+    }, 16); // ~60fps throttling
+
+    $(window).scroll(handleSmartNavbar);
+
+    // Dropdown on mouse hover
+    const $dropdown = $(".dropdown");
+    const $dropdownToggle = $(".dropdown-toggle");
+    const $dropdownMenu = $(".dropdown-menu");
+    const showClass = "show";
+
+    $(window).on("load resize", function () {
+        if (this.matchMedia("(min-width: 992px)").matches) {
+            $dropdown.hover(
+                function () {
+                    const $this = $(this);
+                    $this.addClass(showClass);
+                    $this.find($dropdownToggle).attr("aria-expanded", "true");
+                    $this.find($dropdownMenu).addClass(showClass);
+                },
+                function () {
+                    const $this = $(this);
+                    $this.removeClass(showClass);
+                    $this.find($dropdownToggle).attr("aria-expanded", "false");
+                    $this.find($dropdownMenu).removeClass(showClass);
+                }
+            );
+        } else {
+            $dropdown.off("mouseenter mouseleave");
+        }
+    });
+
+    // Optimized Back to top button with throttling
+    const handleBackToTop = throttle(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+
         }
       );
     } else {
