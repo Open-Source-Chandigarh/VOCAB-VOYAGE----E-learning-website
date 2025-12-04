@@ -299,11 +299,21 @@ body.dark-mode .dark-mode-toggle .fa-moon {
 
 /*** Spinner ***/
 #spinner {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .5s ease-out, visibility 0s linear .5s;
+      opacity: 1;
+    visibility: visible;
+    animation: hideSpinner 1s ease-out forwards;
+    animation-delay: 1.5s; /* time before it starts hiding */
     z-index: 99999;
 }
+
+
+@keyframes hideSpinner {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 
 #spinner.show {
     transition: opacity .5s ease-out, visibility 0s linear 0s;
